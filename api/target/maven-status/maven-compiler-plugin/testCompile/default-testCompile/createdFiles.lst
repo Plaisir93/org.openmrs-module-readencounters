@@ -1,0 +1,2 @@
+org\openmrs\module\theencounters\api\TheencountersServiceTest.class
+org\openmrs\module\theencounters\api\dao\TheencountersDaoTest.class

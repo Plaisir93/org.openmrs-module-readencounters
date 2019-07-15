@@ -1,0 +1,6 @@
+org\openmrs\module\theencounters\Item.class
+org\openmrs\module\theencounters\api\TheencountersService.class
+org\openmrs\module\theencounters\TheencountersConfig.class
+org\openmrs\module\theencounters\api\dao\TheencountersDao.class
+org\openmrs\module\theencounters\api\impl\TheencountersServiceImpl.class
+org\openmrs\module\theencounters\TheencountersActivator.class
