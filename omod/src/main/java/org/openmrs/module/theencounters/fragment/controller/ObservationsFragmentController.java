@@ -7,11 +7,10 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.plr.fragment.controller;
+package org.openmrs.module.theencounters.fragment.controller;
 
 import org.openmrs.api.UserService;
 import org.openmrs.api.ObsService;
-import org.openmrs.Patient;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import java.util.Date;

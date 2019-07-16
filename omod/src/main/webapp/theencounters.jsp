@@ -16,7 +16,7 @@
       <tr>
         <td>${encounter.encounterId}</td>
         <td>${encounter.encounterType}</td>
-        <td>${encounter.encounterDateTime}</td>
+        <td>${encounter.encounterDatetime}</td>
         <td>${encounter.dateCreated}</td>
       </tr>		
   </c:forEach>

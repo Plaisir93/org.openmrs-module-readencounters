@@ -1,4 +1,5 @@
-org\openmrs\module\plr\fragment\controller\ObservationsFragmentController.class
+org\openmrs\module\theencounters\fragment\controller\ObservationsFragmentController.class
+org\openmrs\module\theencounters\web\controller\PlrController.class
 org\openmrs\module\theencounters\fragment\controller\UsersFragmentController.class
 org\openmrs\module\theencounters\extension\html\AdminList.class
 org\openmrs\module\theencounters\web\controller\TheencountersController.class

@@ -10,30 +10,37 @@
 package org.openmrs.module.theencounters.web.controller;
 
 import java.util.List;
-import java.util.Calendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.text.ParseException;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.User;
+import org.openmrs.Obs;
 import org.openmrs.api.UserService;
-import org.openmrs.Encounter;
-import org.openmrs.api.EncounterService;
+import org.openmrs.api.ObsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * This class configured as controller using annotation and mapped with the URL of
- * 'module/theencounters/theencountersLink.form'.
+ * 'module/plr/plrLink.form'.
  */
-@Controller("${rootrootArtifactId}.TheencountersController")
-@RequestMapping(value = "module/theencounters/theencounters.form")
-public class TheencountersController {
+@Controller("${rootrootArtifactId}.PlrController")
+@RequestMapping(value = "module/theencounters/plr.form")
+public class PlrController {
 	
 	/** Logger for this class and subclasses */
 	protected final Log log = LogFactory.getLog(getClass());
@@ -42,10 +49,10 @@ public class TheencountersController {
 	UserService userService;
 	
 	@Autowired
-	EncounterService encounterService;
+	ObsService obsService;
 	
 	/** Success form view name */
-	private final String VIEW = "/module/theencounters/theencounters";
+	private final String VIEW = "/module/theencounters/plr";
 	
 	/**
 	 * Initially called after the getUsers method to get the landing form name
@@ -66,7 +73,7 @@ public class TheencountersController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String onPostEncounters(HttpSession httpSession, @ModelAttribute("anyRequestObject") Object anyRequestObject,
+	public String onPost(HttpSession httpSession, @ModelAttribute("anyRequestObject") Object anyRequestObject,
 	        BindingResult errors) {
 		
 		if (errors.hasErrors()) {
@@ -74,6 +81,29 @@ public class TheencountersController {
 		}
 		
 		return VIEW;
+	}
+	
+	// fromDate and toDate generating methods for the EncounterSearchCriteria Object
+	public Date defaultFromDate() {
+		Calendar fromDate = Calendar.getInstance();
+		fromDate.set(fromDate.DAY_OF_MONTH, 1);
+		return fromDate.getTime();
+	}
+	
+	public Date defaultToDate() {
+		//DateFormat df = new SimpleDateFormat("yyyy-MM-d", Locale.ENGLISH);
+		Calendar toDate = Calendar.getInstance();
+		return toDate.getTime();
+	}
+	
+	@ModelAttribute("observations")
+	protected List<Obs> getAllObservations(Date startDate, Date endDate) throws Exception {
+		List<Obs> observations = obsService.getObservations(null, null, null, null, null, null, null, null, null,
+		    defaultFromDate(), defaultToDate(), true);
+		
+		// this object will be made available to the jsp page under the variable name
+		// that is defined in the @ModuleAttribute tag
+		return observations;
 	}
 	
 	/**
@@ -88,23 +118,6 @@ public class TheencountersController {
 		// this object will be made available to the jsp page under the variable name
 		// that is defined in the @ModuleAttribute tag
 		return users;
-	}
-	
-	// fromDate and toDate generating methods for the EncounterSearchCriteria Object
-	public Date defaultFromDate() {
-		Calendar fromDate = Calendar.getInstance();
-		fromDate.set(fromDate.DAY_OF_MONTH, 1);
-		return fromDate.getTime();
-	}
-	
-	@ModelAttribute("encounters")
-	protected List<Encounter> getAllEncounters() throws Exception {
-		List<Encounter> encounters = encounterService.getEncounters(null, null, defaultFromDate(), Calendar.getInstance()
-		        .getTime(), null, null, null, null, null, true);
-		
-		// this object will be made available to the jsp page under the variable name
-		// that is defined in the @ModuleAttribute tag
-		return encounters;
 	}
 	
 }
