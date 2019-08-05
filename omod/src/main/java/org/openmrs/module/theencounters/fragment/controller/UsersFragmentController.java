@@ -9,9 +9,14 @@
  */
 package org.openmrs.module.theencounters.fragment.controller;
 
+import java.util.List;
 import org.openmrs.api.UserService;
+import org.openmrs.User;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *  * Controller for a fragment that shows all users  
@@ -19,7 +24,17 @@ import org.openmrs.ui.framework.fragment.FragmentModel;
 public class UsersFragmentController {
 	
 	public void controller(FragmentModel model, @SpringBean("userService") UserService service) {
-		model.addAttribute("users", service.getAllUsers());
+		List<User> users = service.getAllUsers();
+		ObjectMapper mapper = new ObjectMapper();
+		
+		File file = new File("users.json");
+		try {
+			// Serialize Java object into JSON file.
+			mapper.writeValue(file, users);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("users", users);
 	}
-	
 }

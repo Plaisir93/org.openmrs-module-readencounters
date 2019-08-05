@@ -9,6 +9,9 @@
  */
 package org.openmrs.module.theencounters.web.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,10 +42,10 @@ public class TheencountersController {
 	protected final Log log = LogFactory.getLog(getClass());
 	
 	@Autowired
-	UserService userService;
+	EncounterService encounterService;
 	
 	@Autowired
-	EncounterService encounterService;
+	UserService userService;
 	
 	/** Success form view name */
 	private final String VIEW = "/module/theencounters/theencounters";
@@ -81,15 +84,6 @@ public class TheencountersController {
 	 * pojo. The bean name defined in the ModelAttribute annotation and the type can be just defined
 	 * by the return type of this method
 	 */
-	@ModelAttribute("users")
-	protected List<User> getUsers() throws Exception {
-		List<User> users = userService.getAllUsers();
-		
-		// this object will be made available to the jsp page under the variable name
-		// that is defined in the @ModuleAttribute tag
-		return users;
-	}
-	
 	// fromDate and toDate generating methods for the EncounterSearchCriteria Object
 	public Date defaultFromDate() {
 		Calendar fromDate = Calendar.getInstance();
@@ -102,9 +96,40 @@ public class TheencountersController {
 		List<Encounter> encounters = encounterService.getEncounters(null, null, defaultFromDate(), Calendar.getInstance()
 		        .getTime(), null, null, null, null, null, true);
 		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		File file = new File("encounters.json");
+		try {
+			// Serialize Java object into JSON file.
+			mapper.writeValue(file, encounters);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		// this object will be made available to the jsp page under the variable name
 		// that is defined in the @ModuleAttribute tag
 		return encounters;
+	}
+	
+	@ModelAttribute("users")
+	protected List<User> getUsers() throws Exception {
+		List<User> users = userService.getAllUsers();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		File file = new File("users.json");
+		try {
+			// Serialize Java object into JSON file.
+			for (User user : users) {
+				mapper.writeValue(file, user);
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		// this object will be made available to the jsp page under the variable name
+		// that is defined in the @ModuleAttribute tag
+		return users;
 	}
 	
 }

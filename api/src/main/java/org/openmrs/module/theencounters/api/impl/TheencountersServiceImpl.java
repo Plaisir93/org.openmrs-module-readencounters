@@ -12,6 +12,7 @@ package org.openmrs.module.theencounters.api.impl;
 import org.openmrs.api.APIException;
 import org.openmrs.api.UserService;
 import org.openmrs.api.EncounterService;
+import org.openmrs.api.PatientService;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.theencounters.Item;
 import org.openmrs.module.theencounters.api.TheencountersService;
@@ -24,6 +25,8 @@ public class TheencountersServiceImpl extends BaseOpenmrsService implements Thee
 	UserService userService;
 	
 	EncounterService encounterService;
+	
+	PatientService patientService;
 	
 	/**
 	 * Injected in moduleApplicationContext.xml
@@ -44,6 +47,13 @@ public class TheencountersServiceImpl extends BaseOpenmrsService implements Thee
 	 */
 	public void setEncounterService(EncounterService encounterService) {
 		this.encounterService = encounterService;
+	}
+	
+	/**
+	 * Injected in moduleApplicationContext.xml
+	 */
+	public void setPatientService(PatientService patientService) {
+		this.patientService = patientService;
 	}
 	
 	@Override

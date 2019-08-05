@@ -1,6 +1,10 @@
 org\openmrs\module\theencounters\fragment\controller\ObservationsFragmentController.class
-org\openmrs\module\theencounters\web\controller\PlrController.class
 org\openmrs\module\theencounters\fragment\controller\UsersFragmentController.class
 org\openmrs\module\theencounters\extension\html\AdminList.class
+org\openmrs\module\theencounters\fragment\controller\VisitsFragmentController.class
+org\openmrs\module\theencounters\web\controller\PlrController.class
+org\openmrs\module\theencounters\fragment\controller\PatientsFragmentController.class
+org\openmrs\module\theencounters\web\controller\PatientsController.class
 org\openmrs\module\theencounters\web\controller\TheencountersController.class
 org\openmrs\module\theencounters\fragment\controller\EncountersFragmentController.class
+org\openmrs\module\theencounters\web\controller\VisitsController.class
