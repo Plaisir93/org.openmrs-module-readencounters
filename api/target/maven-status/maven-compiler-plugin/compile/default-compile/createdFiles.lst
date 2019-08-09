@@ -4,3 +4,4 @@ org\openmrs\module\theencounters\TheencountersConfig.class
 org\openmrs\module\theencounters\api\dao\TheencountersDao.class
 org\openmrs\module\theencounters\api\impl\TheencountersServiceImpl.class
 org\openmrs\module\theencounters\TheencountersActivator.class
+org\openmrs\module\theencounters\DatabaseConnection.class
