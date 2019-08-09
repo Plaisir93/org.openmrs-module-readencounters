@@ -53,9 +53,9 @@ public class TheencountersController {
 	static final String DB_URL = "jdbc:mysql://localhost/test_plr";
 	
 	//  Database credentials
-	static final String USER = "root";
+	static final String USER = "username";
 	
-	static final String PASS = "solutions";
+	static final String PASS = "password";
 	
 	@Autowired
 	ObsService obsService;
